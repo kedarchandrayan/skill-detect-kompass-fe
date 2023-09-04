@@ -1,0 +1,14 @@
+.rowContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.rowElement {
+    border: 1px solid black;
+    padding: 8px
+}
+
+.selectionCriteria {
+    flex: 3;
+}
+
