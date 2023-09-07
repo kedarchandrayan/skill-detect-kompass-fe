@@ -8,13 +8,10 @@ import useIsMounted from "../../hooks/useIsMounted";
 function Header() {
   return (
     <tr className={`${styles.headerContainer}`}>
-      <th className={elementStyle}>Name</th>
       <th className={elementStyle}>Date</th>
-      <th className={`${rowStyles.selectionCriteria} ${elementStyle}`}>
-        Selection Criteria
-      </th>
-      <th className={elementStyle}>Resume Folder URL</th>
-      <th className={elementStyle}>Report URL</th>
+      <th className={elementStyle}>Mission Name</th>
+      <th className={elementStyle}>Resume Folder</th>
+      <th className={elementStyle}>Report</th>
       <th
         className={elementStyle}
       >

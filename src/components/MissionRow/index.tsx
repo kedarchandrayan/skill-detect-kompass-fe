@@ -27,11 +27,8 @@ export default function MissionRow(props: MissionRowProps) {
     d.getMinutes();
   return (
     <tr className="cursor-pointer" onClick={navigateToMissionDetailsPage}>
-      <td className={elementStyle}>{props.name}</td>
       <td className={elementStyle}>{`${date}`}</td>
-      <td className={`${styles.selectionCriteria} ${elementStyle}`}>
-        {props.selectionCriteria}
-      </td>
+      <td className={elementStyle}>{props.name}</td>
       <td className={elementStyle}>{`${props.resumeFolderUrl}`}</td>
       <td className={elementStyle}>{`${props.reportUrl}`}</td>
       <td className={elementStyle}>{`${props.status}`}</td>
