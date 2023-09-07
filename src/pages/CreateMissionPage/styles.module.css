@@ -1,0 +1,91 @@
+.selectedOptions {
+  margin-top: 20px;
+}
+
+.selectedOptions h2 {
+  margin-bottom: 10px;
+}
+
+.selectedOptions ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+}
+
+.selectedOptions ul li {
+  display: inline-block;
+  background-color: #176B87;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.selectedOptions ul li button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  margin-left: 4px;
+  cursor: pointer;
+}
+
+.optionContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.crossBtn {
+  font-weight: bold;
+}
+
+.input {
+  width: 200px;
+  margin: 2px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.errorTxt {
+  color: red;
+}
+
+.btnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skillsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  max-height: 100px;
+  overflow: scroll;
+  align-items: start;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.skillContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 8px;
+  margin: 4px 4px;
+  color: white;
+  background-color: #176B87;
+  border-radius: 8px;
+}
+
+.skillText {
+  font-weight: 500;
+}
+.skillBtn {
+ margin-left: 6px;
+ width: 15px;
+ height: 15px;
+ font-weight: bolder;
+}
