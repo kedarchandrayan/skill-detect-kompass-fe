@@ -6,6 +6,7 @@ import appRouteNameConstants from "./constants/routes";
 import LoginPage from "./pages/LoginPage";
 import AuthenticatedPage from "./components/AuthenticatedPage";
 import CreateMissionPage from "./pages/CreateMissionPage";
+import MissionDetailsPage from "./pages/MissionDetailsPage";
 
 function App() {
   return (
@@ -18,8 +19,15 @@ function App() {
           />
           <Route path={appRouteNameConstants.LOGIN} element={<LoginPage />} />
           {/* <Route element={<AuthenticatedPage />}> */}
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/create" element={<CreateMissionPage />} />
+          <Route path={appRouteNameConstants.HOME} element={<HomePage />} />
+          <Route
+            path={appRouteNameConstants.CREATE}
+            element={<CreateMissionPage />}
+          />
+          <Route
+            path={appRouteNameConstants.MISSION_DETAILS}
+            element={<MissionDetailsPage />}
+          />
           {/* </Route> */}
         </Routes>
       </BrowserRouter>

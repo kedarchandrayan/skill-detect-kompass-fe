@@ -3,6 +3,7 @@ import useMissionsTableData from "./useMissionsTableData";
 import styles from "./styles.module.css";
 import rowStyles from "../MissionRow/styles.module.css";
 import Loader from "../Loader/Loader";
+import useIsMounted from "../../hooks/useIsMounted";
 
 function Header() {
   return (
@@ -42,7 +43,7 @@ export default function MissionsTable() {
           <thead className="sticky top-0 bg-slate-50">
             <Header />
           </thead>
-          <tbody className="bg-white dark:bg-slate-800">
+          <tbody className="bg-white">
             {data.map((value, idx) => {
               return (
                 <MissionRow
@@ -52,7 +53,7 @@ export default function MissionsTable() {
                   date={value.createdAt}
                   selectionCriteria={value.customSelectionCriteria}
                   reportUrl={value.reportUrl}
-                  resumeFolderUrl={value.resumeFolder}
+                  resumeFolderUrl={value.resumeFolderUrl}
                   status={value.status}
                 />
               );

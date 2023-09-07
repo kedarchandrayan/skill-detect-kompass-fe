@@ -1,14 +1,14 @@
 export type Mission = {
   id: number;
   name: string;
-  resumeFolder: string;
-  skillIds: Array<number>;
-  totalExperienceDetails: Array<ExperienceDetails>;
+  resumeFolderUrl: string;
+  skills: Array<string>;
+  totalExperienceDetails: string;
   minCGPA?: number;
   customSelectionCriteria?: string;
   reportUrl?: string;
-  totalResumes?: number;
-  processedResumes?: number;
+  totalCount?: number;
+  processedCount?: number;
   status: MissionStatus;
   createdAt: number;
   updatedAt: number;

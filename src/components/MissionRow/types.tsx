@@ -5,7 +5,7 @@ export type MissionRowProps = {
     name: Mission['name']
     date: Mission['createdAt']
     selectionCriteria: Mission['customSelectionCriteria']
-    resumeFolderUrl: Mission['resumeFolder']
+    resumeFolderUrl: Mission['resumeFolderUrl']
     reportUrl: Mission['reportUrl']
     status: Mission['status']
 }

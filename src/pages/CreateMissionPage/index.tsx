@@ -5,6 +5,7 @@ import ExperienceInput from "../../components/ExperienceInput";
 import missionsApi from "../../api/missionsApi";
 import { useNavigate } from "react-router-dom";
 import Loader from "../../components/Loader/Loader";
+import appRouteNameConstants from "../../constants/routes";
 
 export default function CreateMissionPage() {
   const [name, setName] = useState("");
@@ -62,7 +63,7 @@ export default function CreateMissionPage() {
           selectionCriteria: selectionCriteria,
         })
         .then((resp) => {
-          navigate("/home");
+          navigate(appRouteNameConstants.HOME);
         })
         .catch((err: any) => {
           setError(err.message);
@@ -91,9 +92,7 @@ export default function CreateMissionPage() {
 
   return (
     <div className="flex flex-col items-center justify-center createMission p-[16px]">
-      <h1 className="text-[50px] font-semibold text-[#001C30]">
-        Launch Mission Page
-      </h1>
+      <h1 className="text-[30px] font-semibold text-[#001C30]">Create Mission</h1>
       <form
         onSubmit={onSubmit}
         className="gap-[30px] mt-[50px] w-[500px] max-w-[500px]"
@@ -152,6 +151,8 @@ export default function CreateMissionPage() {
         <div className="relative h-10 w-full min-w-[300px] my-[18px]">
           <input
             value={minCGPA}
+            min={0}
+            max={10}
             type="number"
             onChange={handleMinCGPA}
             className="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-indigo-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
