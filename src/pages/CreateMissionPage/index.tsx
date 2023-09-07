@@ -49,6 +49,7 @@ export default function CreateMissionPage() {
   };
 
   const onSubmit = (e: any) => {
+    e.preventDefault();
     if (validateValues()) {
       setApiInProgress(true);
       missionsApi
@@ -93,9 +94,13 @@ export default function CreateMissionPage() {
       <h1 className="text-[50px] font-semibold text-[#001C30]">
         Launch Mission Page
       </h1>
-      <div className="gap-[30px] mt-[50px] max-w-[500px]">
+      <form
+        onSubmit={onSubmit}
+        className="gap-[30px] mt-[50px] w-[500px] max-w-[500px]"
+      >
         <div className="relative h-10 w-full min-w-[300px] my-[18px]">
           <input
+            required
             value={name}
             onChange={handleNameChange}
             className="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-indigo-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
@@ -107,13 +112,14 @@ export default function CreateMissionPage() {
         </div>
         <div className="relative h-10 w-full min-w-[300px] my-[18px]">
           <input
+            required
             value={resumeFolderLink}
             onChange={handleResumeFolderChange}
             className="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 font-sans text-sm font-normal text-[#643246] outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-indigo-500 focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
             placeholder=" "
           />
           <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-indigo-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-indigo-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-indigo-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-            Resume folder link
+            Resume folder URL
           </label>
         </div>
         <div>
@@ -121,20 +127,24 @@ export default function CreateMissionPage() {
             selectedOptions={selectedSkills}
             onOptionSelect={onSkillSelect}
           />
-          Selected Skills:
-          <div className={`${styles.skillsContainer}`}>
-            {selectedSkills.map((skill, idx) => (
-              <div key={idx} className={`${styles.skillContainer}`}>
-                <span className={`${styles.skillText}`}>{skill}</span>
-                <img
-                  onClick={() => onSkillRemove(skill)}
-                  className={`${styles.skillBtn}`}
-                  src="/icons8-cancel-26.png"
-                  alt="cross"
-                />
+          {selectedSkills.length > 0 && (
+            <>
+              <b>Selected Skills:</b>
+              <div className={`${styles.skillsContainer}`}>
+                {selectedSkills.map((skill, idx) => (
+                  <div key={idx} className={`${styles.skillContainer}`}>
+                    <span className={`${styles.skillText}`}>{skill}</span>
+                    <img
+                      onClick={() => onSkillRemove(skill)}
+                      className={`${styles.skillBtn}`}
+                      src="/icons8-cancel-26.png"
+                      alt="cross"
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
+            </>
+          )}
         </div>
         <div>
           <ExperienceInput onChange={handleExperienceChange} />
@@ -159,7 +169,7 @@ export default function CreateMissionPage() {
             placeholder=" "
           />
           <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-indigo-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-indigo-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-indigo-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-            Custom Selection Criteria
+            Custom selection criteria
           </label>
         </div>
 
@@ -167,16 +177,15 @@ export default function CreateMissionPage() {
           {apiInProgress ? (
             <Loader />
           ) : (
-            <button
+            <input
               className="bg-[#001C30] mt-[8px] text-[#fff] border-2 text-[16px] font-semibold px-[1rem] py-[0.5rem] inline-block hover:bg-transparent hover:border-[#001C30] hover:text-[#001C30] transition tracking-wider"
-              onClick={onSubmit}
-            >
-              Submit
-            </button>
+              name="Submit"
+              type="submit"
+            />
           )}
         </div>
         {!apiInProgress && <h4 className={`${styles.errorTxt}`}>{error}</h4>}
-      </div>
+      </form>
     </div>
   );
 }

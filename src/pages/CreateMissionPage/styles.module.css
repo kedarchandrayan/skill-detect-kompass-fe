@@ -62,8 +62,11 @@
 .skillsContainer {
   display: flex;
   flex-wrap: wrap;
+  max-height: 100px;
+  overflow: scroll;
   align-items: start;
   justify-content: center;
+  margin-bottom: 12px;
 }
 
 .skillContainer {
