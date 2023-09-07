@@ -15,7 +15,7 @@ export default function MissionRow(props: MissionRowProps) {
   };
 
   return (
-    <tr className="cursor-pointer max-w-[100vw]" onClick={navigateToMissionDetailsPage}>
+    <tr className="cursor-pointer max-w-[100vw] hover:bg-gray-100" onClick={navigateToMissionDetailsPage}>
       <td className={elementStyle}>{`${new Date(props.date * 1000).toLocaleString()}`}</td>
       <td className={elementStyle}>{props.name}</td>
       <td className={`${elementStyle} break-all`}>{`${props.resumeFolderUrl}`}</td>

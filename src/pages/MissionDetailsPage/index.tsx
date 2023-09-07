@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { Mission } from "../../components/MissionsTable/types";
 import missionsApi from "../../api/missionsApi";
@@ -7,19 +7,28 @@ import styles from "./styles.module.css";
 
 function MissionDetailsPage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const [apiInProgress, setApiInProgress] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [apiInProgress, setApiInProgress] = useState(false);
   const [missionDetails, setMissionDetails] = useState<Mission | undefined>();
+  const pollingTimeoutRef = useRef<NodeJS.Timeout>();
 
   const navigate = useNavigate();
   const navigateBack = () => {
-    navigate(-1)
-  }
+    navigate(-1);
+  };
 
   const missionId = searchParams.get("id");
-  
+
   useEffect(() => {
     fetchData();
+    return () => {
+      stopPolling();
+    };
   }, []);
+
+  const stopPolling = () => {
+    clearTimeout(pollingTimeoutRef.current);
+  };
 
   const fetchData = () => {
     if (missionId) {
@@ -45,15 +54,28 @@ function MissionDetailsPage() {
             updatedAt: mission.updated_at,
           };
           setMissionDetails(missionData);
+          if (mission.status !== "COMPLETED" || mission.status !== "FAILED") {
+            pollingTimeoutRef.current = setTimeout(() => {
+              fetchData();
+            }, 2000);
+          }
         })
         .catch((err) => console.log("Error in api: ", err.message))
         .finally(() => {
+          isLoading && setIsLoading(false);
           setApiInProgress(false);
         });
     }
   };
 
-  return apiInProgress ? (
+  function onRefreshStatus() {
+    if (!apiInProgress) {
+      stopPolling();
+      fetchData();
+    }
+  }
+
+  return isLoading ? (
     <div className={`${styles.loaderContainer}`}>
       <Loader />
     </div>
@@ -62,7 +84,16 @@ function MissionDetailsPage() {
   ) : (
     <div className="relative max-w-screen-md mx-auto p-[8px] ">
       <div className="bg-white rounded-lg border p-6 max-w-screen-md mx-auto mt-8">
-      <div className="cursor-pointer absolute top-[55px] left-[25px] flex flex-row justify-center align-center" onClick={navigateBack}><img className="w-[20px] mr-[6px]" src="back-arrow.png" alt="back_arrow"/></div>
+        <div
+          className="cursor-pointer absolute top-[55px] left-[25px] flex flex-row justify-center align-center"
+          onClick={navigateBack}
+        >
+          <img
+            className="w-[20px] mr-[6px]"
+            src="back-arrow.png"
+            alt="back_arrow"
+          />
+        </div>
         <h1 className="text-2xl font-semibold text-gray-800 mb-6">
           {missionDetails.name}
         </h1>
@@ -161,7 +192,7 @@ function MissionDetailsPage() {
       </div>
       <button
         className="bg-[#001C30] mt-[8px] text-[#fff] border-2 text-[16px] font-semibold px-[1rem] py-[0.5rem] inline-block hover:bg-transparent hover:border-[#001C30] hover:text-[#001C30] transition tracking-wider"
-        onClick={() => fetchData()}
+        onClick={onRefreshStatus}
       >
         Refresh Status
       </button>

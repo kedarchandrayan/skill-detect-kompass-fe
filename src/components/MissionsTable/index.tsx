@@ -1,7 +1,6 @@
 import MissionRow, { elementStyle } from "../MissionRow";
 import useMissionsTableData from "./useMissionsTableData";
 import styles from "./styles.module.css";
-import rowStyles from "../MissionRow/styles.module.css";
 import Loader from "../Loader/Loader";
 import useIsMounted from "../../hooks/useIsMounted";
 
