@@ -36,7 +36,7 @@ export default function MissionsTable() {
       {isLoading ? (
         <Loader />
       ) : (
-        <table className="table-auto w-full">
+        <table className="table-fixed whitespace-normal max-w-[80vw]">
           <thead className="sticky top-0 bg-slate-50">
             <Header />
           </thead>

@@ -15,11 +15,11 @@ export default function MissionRow(props: MissionRowProps) {
   };
 
   return (
-    <tr className="cursor-pointer" onClick={navigateToMissionDetailsPage}>
+    <tr className="cursor-pointer max-w-[100vw]" onClick={navigateToMissionDetailsPage}>
       <td className={elementStyle}>{`${new Date(props.date * 1000).toLocaleString()}`}</td>
       <td className={elementStyle}>{props.name}</td>
-      <td className={elementStyle}>{`${props.resumeFolderUrl}`}</td>
-      <td className={elementStyle}>{`${props.reportUrl}`}</td>
+      <td className={`${elementStyle} break-all`}>{`${props.resumeFolderUrl}`}</td>
+      <td className={`${elementStyle} break-all`}>{`${props.reportUrl}`}</td>
       <td className={elementStyle}>{`${props.status}`}</td>
     </tr>
   );

@@ -77,7 +77,7 @@ function MissionDetailsPage() {
                   href={missionDetails.resumeFolderUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-500 hover:underline"
+                  className="text-blue-500 hover:underline overflow-hidden break-all"
                 >
                   {missionDetails.resumeFolderUrl}
                 </a>
@@ -89,9 +89,9 @@ function MissionDetailsPage() {
                 {missionDetails.reportUrl ? (
                   <a
                     href={missionDetails.reportUrl}
-                    target="_blank"
+                    target="_blank "
                     rel="noopener noreferrer"
-                    className="text-blue-500 hover:underline"
+                    className="text-blue-500 hover:underline break-all"
                   >
                     {missionDetails.reportUrl}
                   </a>
