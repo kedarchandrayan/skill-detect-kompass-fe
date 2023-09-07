@@ -1,14 +1,7 @@
-.rowContainer {
-    display: flex;
-    flex-direction: row;
-}
-
 .rowElement {
-    border: 1px solid black;
-    padding: 8px
+  text-align: left;
 }
 
 .selectionCriteria {
-    flex: 3;
+  flex: 3;
 }
-

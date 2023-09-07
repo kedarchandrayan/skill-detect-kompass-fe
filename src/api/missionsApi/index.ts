@@ -1,9 +1,8 @@
 import { APIService } from "../../services/APIService";
-import { mockMissions, mockSkills } from "./mockData";
+import { mockMissions } from "./mockData";
 
 const EndPoints = {
-  getMissions: "/missions",
-  getSkills: "/missions/skills",
+  missions: "/missions",
 };
 
 class MissionsApi {
@@ -17,7 +16,7 @@ class MissionsApi {
     //   baseURL: "https://localhost:3000/api/v1",
     // });
 
-    // return apiService.get(EndPoints.getMissions, params);
+    // return apiService.get(EndPoints.missions, params);
 
     return new Promise((resolve, reject) => {
       setTimeout(() => {
@@ -42,18 +41,50 @@ class MissionsApi {
     });
   }
 
-  fetchSkills() {
-    // const apiService: APIService = new APIService({
-    //   baseURL: "https://localhost:3000/api/v1",
-    // });
+  postMission({
+    name,
+    resumeFolderLink,
+    skills,
+    totalExp,
+    minCGPA,
+    selectionCriteria,
+  }: any) {
+    const params: any = {};
 
-    // return apiService.get(EndPoints.getMissions, params);
-    return new Promise((resolve, reject) => {
-      return {
-        success: true,
-        skills: mockSkills,
-      };
-    });
+    if (name) {
+      params["name"] = name;
+    }
+
+    if (resumeFolderLink) {
+      params["resume_folder_url"] = resumeFolderLink;
+    }
+
+    if (skills) {
+      params["skills"] = skills;
+    }
+
+    if (totalExp) {
+      params["total_experience_details"] = totalExp;
+    }
+
+    if (minCGPA !== undefined) {
+      params["min_cgpa"] = minCGPA;
+    }
+
+    if (selectionCriteria) {
+      params["custom_selection_criteria"] = selectionCriteria;
+    }
+
+    const apiService: APIService = new APIService({});
+
+    console.log("API: params", params)
+    return apiService.post(EndPoints.missions, params);
+
+    // return new Promise((resolve, reject) => {
+    //   setTimeout(() => {
+    //     reject({ message: "error in requ" });
+    //   }, 3000);
+    // });
   }
 }
 

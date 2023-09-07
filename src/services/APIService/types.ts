@@ -1,3 +1,3 @@
 export type ApiServiceConfig = {
-  baseURL: string;
+  baseURL?: string;
 };

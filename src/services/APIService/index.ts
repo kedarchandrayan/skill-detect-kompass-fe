@@ -6,6 +6,7 @@ import axios, {
   CancelTokenSource,
 } from "axios";
 import { ApiServiceConfig } from "./types";
+import globalConstants from "../../constants/globalConstants";
 
 export class APIService {
   axios: Axios;
@@ -24,10 +25,11 @@ export class APIService {
     this.getApiCall.bind(this);
     this.postApiCall.bind(this);
 
-    this.apiConfig.baseURL = this.apiConfig.baseURL || 'https://localhost:3000/api/v1'
+    this.apiConfig.baseURL = this.apiConfig.baseURL || globalConstants.baseUrl;
 
     this.axios = axios.create(apiConfig);
 
+    this.addRequestInterceptors();
     this.addResponseInterceptors();
   }
 
@@ -38,6 +40,12 @@ export class APIService {
   static cancelAllOngoingRequest(): void {
     APIService.cancelTokenSource.cancel();
     APIService.cancelTokenSource = axios.CancelToken.source();
+  }
+
+  private addRequestInterceptors() {
+    this.axios.interceptors.request.use((req: any) => {
+      return req;
+    });
   }
 
   /**

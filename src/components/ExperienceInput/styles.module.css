@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.addBtn {
+    font-weight: bolder;
+}
+
+.inputsContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.input {
+    width: 200px;
+    margin: 2px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}

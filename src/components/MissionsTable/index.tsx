@@ -1,29 +1,22 @@
-import MissionRow from "../MissionRow";
+import MissionRow, { elementStyle } from "../MissionRow";
 import useMissionsTableData from "./useMissionsTableData";
 import styles from "./styles.module.css";
 import rowStyles from "../MissionRow/styles.module.css";
+import Loader from "../Loader/Loader";
 
 function Header() {
   return (
     <tr className={`${styles.headerContainer}`}>
-      <th className={`${rowStyles.rowElement}  ${styles.headerHeading}`}>
-        Name
-      </th>
-      <th className={`${rowStyles.rowElement} ${styles.headerHeading}`}>
-        Date
-      </th>
-      <th
-        className={`${rowStyles.rowElement} ${rowStyles.selectionCriteria} ${styles.headerHeading}`}
-      >
+      <th className={elementStyle}>Name</th>
+      <th className={elementStyle}>Date</th>
+      <th className={`${rowStyles.selectionCriteria} ${elementStyle}`}>
         Selection Criteria
       </th>
-      <th className={`${rowStyles.rowElement} ${styles.headerHeading}`}>
-        Resume Folder URL
-      </th>
-      <th className={`${rowStyles.rowElement} ${styles.headerHeading}`}>
-        Report URL
-      </th>
-      <th className={`${rowStyles.rowElement} ${styles.headerHeading}`}>
+      <th className={elementStyle}>Resume Folder URL</th>
+      <th className={elementStyle}>Report URL</th>
+      <th
+        className={elementStyle}
+      >
         Status
       </th>
     </tr>
@@ -32,22 +25,24 @@ function Header() {
 export default function MissionsTable() {
   const { data, onScroll, scrollRef, isLoadingMore, isLoading } =
     useMissionsTableData();
-    
+
   return (
     <div
       onScroll={onScroll}
       ref={(ref) => (scrollRef.current = ref)}
       id="scrollableDiv"
-      className={`${styles.container}`}
+      className={`${styles.container} mt-[50px] mb-[30px] !p-0 ${
+        !isLoading ? "border rounded-tr-[25px] rounded-tl-[25px]" : ""
+      }`}
     >
       {isLoading ? (
-        <h4>Loading...</h4>
+        <Loader />
       ) : (
-        <table>
-          <thead>
+        <table className="table-auto w-full">
+          <thead className="sticky top-0 bg-slate-50">
             <Header />
           </thead>
-          <tbody>
+          <tbody className="bg-white dark:bg-slate-800">
             {data.map((value, idx) => {
               return (
                 <MissionRow
@@ -65,7 +60,11 @@ export default function MissionsTable() {
           </tbody>
         </table>
       )}
-      {!isLoading && isLoadingMore && <h4>Loading...</h4>}
+      {!isLoading && isLoadingMore && (
+        <div className={`${styles.loaderContainer}`}>
+          <Loader />
+        </div>
+      )}
     </div>
   );
 }

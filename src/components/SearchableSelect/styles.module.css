@@ -1,0 +1,30 @@
+/* App.css */
+.searchableSelect {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.searchableSelect ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  max-height: 150px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  position: absolute;
+  background-color: white;
+  z-index: 100;
+}
+
+.searchableSelect ul li {
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.searchableSelect ul li:hover {
+  background-color: #f0f0f0;
+}
