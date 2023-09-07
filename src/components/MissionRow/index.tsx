@@ -14,20 +14,9 @@ export default function MissionRow(props: MissionRowProps) {
     navigate(`${appRouteNameConstants.MISSION_DETAILS}?id=${props.id}`);
   };
 
-  const d = new Date(props.date * 1000);
-  const date =
-    d.getDate() +
-    "/" +
-    (d.getMonth() + 1) +
-    "/" +
-    d.getFullYear() +
-    " " +
-    d.getHours() +
-    ":" +
-    d.getMinutes();
   return (
     <tr className="cursor-pointer" onClick={navigateToMissionDetailsPage}>
-      <td className={elementStyle}>{`${date}`}</td>
+      <td className={elementStyle}>{`${new Date(props.date * 1000).toLocaleString()}`}</td>
       <td className={elementStyle}>{props.name}</td>
       <td className={elementStyle}>{`${props.resumeFolderUrl}`}</td>
       <td className={elementStyle}>{`${props.reportUrl}`}</td>
